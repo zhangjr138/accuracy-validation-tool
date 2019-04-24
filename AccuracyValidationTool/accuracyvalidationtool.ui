@@ -226,6 +226,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="maximum">
+           <number>10000</number>
+          </property>
          </widget>
         </item>
         <item>
@@ -265,6 +268,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>10000</number>
           </property>
          </widget>
         </item>
@@ -334,7 +340,7 @@
    <slot>slot_openAVideo()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>737</x>
+     <x>709</x>
      <y>694</y>
     </hint>
     <hint type="destinationlabel">
@@ -414,8 +420,8 @@
    <slot>slot_setReportInterval()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>593</x>
-     <y>648</y>
+     <x>589</x>
+     <y>657</y>
     </hint>
     <hint type="destinationlabel">
      <x>624</x>
@@ -439,6 +445,70 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_inMinusOne</sender>
+   <signal>clicked()</signal>
+   <receiver>AccuracyValidationToolClass</receiver>
+   <slot>slot_countInMinus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>883</x>
+     <y>608</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>840</x>
+     <y>603</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_outMinusOne</sender>
+   <signal>clicked()</signal>
+   <receiver>AccuracyValidationToolClass</receiver>
+   <slot>slot_countOutMinus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>867</x>
+     <y>651</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>841</x>
+     <y>647</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_output</sender>
+   <signal>clicked()</signal>
+   <receiver>AccuracyValidationToolClass</receiver>
+   <slot>slot_outputData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>742</x>
+     <y>685</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>725</x>
+     <y>692</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_close</sender>
+   <signal>clicked()</signal>
+   <receiver>AccuracyValidationToolClass</receiver>
+   <slot>slot_closeVideo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>877</x>
+     <y>681</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>843</x>
+     <y>708</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slot_openAVideo()</slot>
@@ -448,5 +518,9 @@
   <slot>slot_setFrameRate()</slot>
   <slot>slot_setReportInterval()</slot>
   <slot>slot_setStartTime()</slot>
+  <slot>slot_countInMinus()</slot>
+  <slot>slot_countOutMinus()</slot>
+  <slot>slot_outputData()</slot>
+  <slot>slot_closeVideo()</slot>
  </slots>
 </ui>

@@ -18,19 +18,17 @@ AccuracyValidationTool::AccuracyValidationTool(QWidget *parent)
 
 
 AccuracyValidationTool::~AccuracyValidationTool()
-{
-	// 等待视频播放跳出循环
-	while (isVideoOn)
-	{
-		QThread::msleep(10);
-		QCoreApplication::processEvents();
-	}
+{ // 在程序结束前释放vCapture
+	
 }
 
 
 // 检测键盘按下事件
 void AccuracyValidationTool::keyPressEvent(QKeyEvent *event)
-{
+{ // 空格键播放/停止视频
+  // 向右键播放下一帧（长按连续前进播放）
+  // 向左键播放上一帧（长按连续后退播放）
+
 	switch (event->key())
 	{
 	case Qt::Key_Space:
@@ -51,9 +49,32 @@ void AccuracyValidationTool::keyPressEvent(QKeyEvent *event)
 
 // 事件过滤器
 bool AccuracyValidationTool::eventFilter(QObject *obj, QEvent *event)
-{ // 特别注意控件处理的最终返回值
+{ // 左击视频label区域countIn+1，右击countOut+1
+  // 特别注意控件处理的最终返回值
   // return true: 告诉Qt已经处理的这个事件
   // return false: Qt会把这个事件传递给它的父窗口部件来处理
+
+	if (obj == ui.label_video)
+	{
+		if (event->type() == QEvent::MouseButtonRelease)
+		{
+			QMouseEvent *mevent = (QMouseEvent*)(event);
+
+			// 左击countIn+1
+			if (mevent->button() == Qt::LeftButton)
+			{
+				countInPlus();
+			}
+
+			// 右击countOut+1
+			else if (mevent->button() == Qt::RightButton)
+			{
+				countOutPlus();
+			}
+
+			return false;
+		}
+	}
 
 	return QMainWindow::eventFilter(obj, event);
 }
@@ -97,8 +118,9 @@ void AccuracyValidationTool::videoBackward()
 
 // 视频的播放和暂停
 void AccuracyValidationTool::videoPlay()
-{
-	isVideoStopped = false;
+{ // 只要能读到图片则一直执行播放循环，否则跳出循环，播放帧率为设置的帧率
+  // 播放的时候也一直在检测系统信号，一旦播放标志isVideoOn变以false则停止，跳出循环
+
 	while (isVideoOpened && isVideoOn && currentFrame < frameNumTotal && showOneFrame())
 	{
 		currentFrame++;
@@ -106,7 +128,6 @@ void AccuracyValidationTool::videoPlay()
 		QCoreApplication::processEvents();
 	}
 	isVideoOn = false;
-	isVideoStopped = true;
 }
 
 
@@ -153,7 +174,8 @@ void AccuracyValidationTool::videoOpened()
 
 // 重置视频进度条
 void AccuracyValidationTool::resetHSlider(int frameNumTotal)
-{
+{ // 进度条范围为[0, frameNumTotal]，步进值为1，初始值为0
+
 	ui.horizontalSlider->setMinimum(0);
 	ui.horizontalSlider->setMaximum(frameNumTotal - 1);
 	ui.horizontalSlider->setSingleStep(1);
@@ -178,9 +200,26 @@ void AccuracyValidationTool::setHSlider(int currentFrame)
 }
 
 
+// 左击视频label区域的槽函数
+void AccuracyValidationTool::countInPlus()
+{ // 当前记录时间段进入人数+1
+  // 如果+1前人数为0则-1按钮恢复可用
+
+}
+
+
+// 右击视频label区域的槽函数
+void AccuracyValidationTool::countOutPlus()
+{ // 当前记录时间段出去人数+1
+  // 如果+1前人数为0则-1按钮恢复可用
+
+}
+
+
 // Mat转QImage
 QImage AccuracyValidationTool::Mat2QImage(Mat cvImg)
-{
+{ // 针对不同格式的图片将Mat格式的图片转成QImage格式，以便于显示到QLabel上
+
 	QImage qImg;
 	if (cvImg.channels() == 3)
 	{ // 三通道彩色图像
@@ -211,11 +250,11 @@ QImage AccuracyValidationTool::Mat2QImage(Mat cvImg)
 
 // 将一帧放到QLabel上
 bool AccuracyValidationTool::showOneFrame()
-{
+{ // 将一张图片显示到QLabel上，如果读得到图片则返回true，否则返回false
+
 	Mat frame;
 	if (vCapture.read(frame))
 	{
-		qDebug() << currentFrame;
 		QImage qImg = Mat2QImage(frame);
 		QPixmap pixmap = QPixmap::fromImage(qImg);
 		ui.label_video->setPixmap(pixmap);
@@ -230,7 +269,10 @@ bool AccuracyValidationTool::showOneFrame()
 
 // 打开一个视频的槽函数
 void AccuracyValidationTool::slot_openAVideo()
-{
+{ // 打开“打开文件”窗口，选择视频
+  // 没有选择视频则提示先打开视频
+  // 视频打开不成功则报错
+
 	QString q_fileName = QFileDialog::getOpenFileName(this, "Open Document", QDir::currentPath(), "All files(*.*)");
 	if (!q_fileName.isNull())
 	{ // 用户选择了文件
@@ -304,7 +346,8 @@ void AccuracyValidationTool::slot_setStartTime()
 
 // 视频进度条被拖动的槽函数
 void AccuracyValidationTool::slot_HSliderMoved(int value)
-{
+{ // 视频进度条被拖动时更改当前帧的值，并将对应图片显示出来
+
 	currentFrame = value;
 	vCapture.set(CV_CAP_PROP_POS_FRAMES, currentFrame);
 	showOneFrame();
@@ -314,7 +357,7 @@ void AccuracyValidationTool::slot_HSliderMoved(int value)
 
 // 视频进度条滑块点击释放的槽函数
 void AccuracyValidationTool::slot_HSliderReleased() 
-{ // 释放后将焦点设在label上，避免键盘按左右键时焦点在进度条上
+{ // 释放后将焦点设在label上，避免键盘按左右键时焦点仍停留在进度条上
 
 	ui.label_video->setFocus();
 }
@@ -322,7 +365,8 @@ void AccuracyValidationTool::slot_HSliderReleased()
 
 // 视频播放速度的槽函数
 void AccuracyValidationTool::slot_videoSpeed(int index)
-{
+{ // x0.5，x1.0，x2.0，x4.0四种播放速度，设定后更改相邻两张图片显示的间隔
+
 	double speedRate = 1;
 	switch (index)
 	{
@@ -342,4 +386,34 @@ void AccuracyValidationTool::slot_videoSpeed(int index)
 		break;
 	}
 	frameInterval = (1.0 / speedRate) * (1000.0 / double(frameRate));
+}
+
+
+// 点击进入人数-1按钮的槽函数
+void AccuracyValidationTool::slot_countInMinus()
+{ // 当前记录时间段进入人数-1
+  // 如果人数减到0则-1按钮变为不可用
+
+}
+
+
+// 点击出去人数-1按钮的槽函数
+void AccuracyValidationTool::slot_countOutMinus()
+{ // 当前记录时间段出去人数-1
+  // 如果人数减到0则-1按钮变为不可用
+
+}
+
+
+// 点击导出数据按钮的槽函数
+void AccuracyValidationTool::slot_outputData()
+{ // 截止到所记录的最大帧数值将记录数据导出为csv文件
+
+}
+
+
+// 点击关闭视频按钮的槽函数
+void AccuracyValidationTool::slot_closeVideo()
+{ // 关闭视频后将重置Ui界面，变为刚打开程序时的状态
+
 }

@@ -208,6 +208,7 @@ public:
         spinBox_countIn->setEnabled(false);
         sizePolicy3.setHeightForWidth(spinBox_countIn->sizePolicy().hasHeightForWidth());
         spinBox_countIn->setSizePolicy(sizePolicy3);
+        spinBox_countIn->setMaximum(10000);
 
         horizontalLayout_5->addWidget(spinBox_countIn);
 
@@ -237,6 +238,7 @@ public:
         spinBox_countOut->setEnabled(false);
         sizePolicy3.setHeightForWidth(spinBox_countOut->sizePolicy().hasHeightForWidth());
         spinBox_countOut->setSizePolicy(sizePolicy3);
+        spinBox_countOut->setMaximum(10000);
 
         horizontalLayout_6->addWidget(spinBox_countOut);
 
@@ -286,6 +288,10 @@ public:
         QObject::connect(pushButton_frameRate, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_setFrameRate()));
         QObject::connect(pushButton_reportInterval, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_setReportInterval()));
         QObject::connect(pushButton_startTime, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_setStartTime()));
+        QObject::connect(pushButton_inMinusOne, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_countInMinus()));
+        QObject::connect(pushButton_outMinusOne, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_countOutMinus()));
+        QObject::connect(pushButton_output, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_outputData()));
+        QObject::connect(pushButton_close, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_closeVideo()));
 
         comboBox_speed->setCurrentIndex(1);
 
