@@ -520,7 +520,7 @@ void AccuracyValidationTool::slot_countOutMinus()
 void AccuracyValidationTool::slot_exportFile()
 { // 截止到所记录的最大帧数值将记录数据导出为csv文件
 
-	QString q_filePath = "outputFile/" + q_fileName;
+	QString q_filePath = "exportFiles/" + q_fileName;
 	QFile file(q_filePath);
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 	{

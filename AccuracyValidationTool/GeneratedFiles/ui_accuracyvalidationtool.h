@@ -67,7 +67,7 @@ public:
     {
         if (AccuracyValidationToolClass->objectName().isEmpty())
             AccuracyValidationToolClass->setObjectName(QStringLiteral("AccuracyValidationToolClass"));
-        AccuracyValidationToolClass->resize(1427, 950);
+        AccuracyValidationToolClass->resize(1070, 767);
         centralWidget = new QWidget(AccuracyValidationToolClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
