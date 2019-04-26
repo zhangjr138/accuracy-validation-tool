@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>957</width>
-    <height>706</height>
+    <width>1070</width>
+    <height>767</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,7 @@
     <item row="0" column="0" colspan="8">
      <widget class="QLabel" name="label_video">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -116,7 +116,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QLabel" name="label_reportInterval">
+         <widget class="QLabel" name="label_recordInterval">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
             <horstretch>0</horstretch>
@@ -129,7 +129,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="spinBox_reportInterval">
+         <widget class="QSpinBox" name="spinBox_recordInterval">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -148,7 +148,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_reportInterval">
+         <widget class="QPushButton" name="pushButton_recordInterval">
           <property name="text">
            <string>Set</string>
           </property>
@@ -302,7 +302,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_output">
+         <widget class="QPushButton" name="pushButton_export">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -310,7 +310,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>  Output Data  </string>
+           <string>  Export File  </string>
           </property>
          </widget>
         </item>
@@ -340,8 +340,8 @@
    <slot>slot_openAVideo()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>709</x>
-     <y>694</y>
+     <x>645</x>
+     <y>692</y>
     </hint>
     <hint type="destinationlabel">
      <x>791</x>
@@ -356,8 +356,8 @@
    <slot>slot_videoSpeed(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>947</x>
-     <y>582</y>
+     <x>945</x>
+     <y>565</y>
     </hint>
     <hint type="destinationlabel">
      <x>924</x>
@@ -372,8 +372,8 @@
    <slot>slot_HSliderMoved(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>229</x>
-     <y>583</y>
+     <x>240</x>
+     <y>566</y>
     </hint>
     <hint type="destinationlabel">
      <x>218</x>
@@ -388,8 +388,8 @@
    <slot>slot_HSliderReleased()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>314</x>
-     <y>583</y>
+     <x>325</x>
+     <y>566</y>
     </hint>
     <hint type="destinationlabel">
      <x>315</x>
@@ -404,8 +404,8 @@
    <slot>slot_setFrameRate()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>588</x>
-     <y>609</y>
+     <x>491</x>
+     <y>608</y>
     </hint>
     <hint type="destinationlabel">
      <x>626</x>
@@ -414,14 +414,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_reportInterval</sender>
+   <sender>pushButton_recordInterval</sender>
    <signal>clicked()</signal>
    <receiver>AccuracyValidationToolClass</receiver>
-   <slot>slot_setReportInterval()</slot>
+   <slot>slot_setRecordInterval()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>589</x>
-     <y>657</y>
+     <x>491</x>
+     <y>650</y>
     </hint>
     <hint type="destinationlabel">
      <x>624</x>
@@ -436,8 +436,8 @@
    <slot>slot_setStartTime()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>584</x>
-     <y>677</y>
+     <x>491</x>
+     <y>692</y>
     </hint>
     <hint type="destinationlabel">
      <x>621</x>
@@ -468,8 +468,8 @@
    <slot>slot_countOutMinus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>867</x>
-     <y>651</y>
+     <x>943</x>
+     <y>650</y>
     </hint>
     <hint type="destinationlabel">
      <x>841</x>
@@ -478,10 +478,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_output</sender>
+   <sender>pushButton_export</sender>
    <signal>clicked()</signal>
    <receiver>AccuracyValidationToolClass</receiver>
-   <slot>slot_outputData()</slot>
+   <slot>slot_exportFile()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>742</x>
@@ -516,11 +516,11 @@
   <slot>slot_videoSpeed(int)</slot>
   <slot>slot_HSliderReleased()</slot>
   <slot>slot_setFrameRate()</slot>
-  <slot>slot_setReportInterval()</slot>
+  <slot>slot_setRecordInterval()</slot>
   <slot>slot_setStartTime()</slot>
   <slot>slot_countInMinus()</slot>
   <slot>slot_countOutMinus()</slot>
-  <slot>slot_outputData()</slot>
+  <slot>slot_exportFile()</slot>
   <slot>slot_closeVideo()</slot>
  </slots>
 </ui>

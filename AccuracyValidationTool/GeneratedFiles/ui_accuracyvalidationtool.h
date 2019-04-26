@@ -42,9 +42,9 @@ public:
     QSpinBox *spinBox_frameRate;
     QPushButton *pushButton_frameRate;
     QHBoxLayout *horizontalLayout_4;
-    QLabel *label_reportInterval;
-    QSpinBox *spinBox_reportInterval;
-    QPushButton *pushButton_reportInterval;
+    QLabel *label_recordInterval;
+    QSpinBox *spinBox_recordInterval;
+    QPushButton *pushButton_recordInterval;
     QHBoxLayout *horizontalLayout;
     QLabel *label_startTime;
     QDateTimeEdit *dateTimeEdit_startTime;
@@ -60,14 +60,14 @@ public:
     QPushButton *pushButton_outMinusOne;
     QHBoxLayout *horizontalLayout_7;
     QPushButton *pushButton_open;
-    QPushButton *pushButton_output;
+    QPushButton *pushButton_export;
     QPushButton *pushButton_close;
 
     void setupUi(QMainWindow *AccuracyValidationToolClass)
     {
         if (AccuracyValidationToolClass->objectName().isEmpty())
             AccuracyValidationToolClass->setObjectName(QStringLiteral("AccuracyValidationToolClass"));
-        AccuracyValidationToolClass->resize(957, 706);
+        AccuracyValidationToolClass->resize(1427, 950);
         centralWidget = new QWidget(AccuracyValidationToolClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -77,7 +77,7 @@ public:
         gridLayout->setVerticalSpacing(12);
         label_video = new QLabel(centralWidget);
         label_video->setObjectName(QStringLiteral("label_video"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(label_video->sizePolicy().hasHeightForWidth());
@@ -132,30 +132,30 @@ public:
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        label_reportInterval = new QLabel(centralWidget);
-        label_reportInterval->setObjectName(QStringLiteral("label_reportInterval"));
+        label_recordInterval = new QLabel(centralWidget);
+        label_recordInterval->setObjectName(QStringLiteral("label_recordInterval"));
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(label_reportInterval->sizePolicy().hasHeightForWidth());
-        label_reportInterval->setSizePolicy(sizePolicy2);
+        sizePolicy2.setHeightForWidth(label_recordInterval->sizePolicy().hasHeightForWidth());
+        label_recordInterval->setSizePolicy(sizePolicy2);
 
-        horizontalLayout_4->addWidget(label_reportInterval);
+        horizontalLayout_4->addWidget(label_recordInterval);
 
-        spinBox_reportInterval = new QSpinBox(centralWidget);
-        spinBox_reportInterval->setObjectName(QStringLiteral("spinBox_reportInterval"));
-        sizePolicy1.setHeightForWidth(spinBox_reportInterval->sizePolicy().hasHeightForWidth());
-        spinBox_reportInterval->setSizePolicy(sizePolicy1);
-        spinBox_reportInterval->setMinimum(1);
-        spinBox_reportInterval->setMaximum(10000);
-        spinBox_reportInterval->setValue(5);
+        spinBox_recordInterval = new QSpinBox(centralWidget);
+        spinBox_recordInterval->setObjectName(QStringLiteral("spinBox_recordInterval"));
+        sizePolicy1.setHeightForWidth(spinBox_recordInterval->sizePolicy().hasHeightForWidth());
+        spinBox_recordInterval->setSizePolicy(sizePolicy1);
+        spinBox_recordInterval->setMinimum(1);
+        spinBox_recordInterval->setMaximum(10000);
+        spinBox_recordInterval->setValue(5);
 
-        horizontalLayout_4->addWidget(spinBox_reportInterval);
+        horizontalLayout_4->addWidget(spinBox_recordInterval);
 
-        pushButton_reportInterval = new QPushButton(centralWidget);
-        pushButton_reportInterval->setObjectName(QStringLiteral("pushButton_reportInterval"));
+        pushButton_recordInterval = new QPushButton(centralWidget);
+        pushButton_recordInterval->setObjectName(QStringLiteral("pushButton_recordInterval"));
 
-        horizontalLayout_4->addWidget(pushButton_reportInterval);
+        horizontalLayout_4->addWidget(pushButton_recordInterval);
 
 
         verticalLayout->addLayout(horizontalLayout_4);
@@ -260,12 +260,12 @@ public:
 
         horizontalLayout_7->addWidget(pushButton_open);
 
-        pushButton_output = new QPushButton(centralWidget);
-        pushButton_output->setObjectName(QStringLiteral("pushButton_output"));
-        sizePolicy3.setHeightForWidth(pushButton_output->sizePolicy().hasHeightForWidth());
-        pushButton_output->setSizePolicy(sizePolicy3);
+        pushButton_export = new QPushButton(centralWidget);
+        pushButton_export->setObjectName(QStringLiteral("pushButton_export"));
+        sizePolicy3.setHeightForWidth(pushButton_export->sizePolicy().hasHeightForWidth());
+        pushButton_export->setSizePolicy(sizePolicy3);
 
-        horizontalLayout_7->addWidget(pushButton_output);
+        horizontalLayout_7->addWidget(pushButton_export);
 
         pushButton_close = new QPushButton(centralWidget);
         pushButton_close->setObjectName(QStringLiteral("pushButton_close"));
@@ -286,11 +286,11 @@ public:
         QObject::connect(horizontalSlider, SIGNAL(sliderMoved(int)), AccuracyValidationToolClass, SLOT(slot_HSliderMoved(int)));
         QObject::connect(horizontalSlider, SIGNAL(sliderReleased()), AccuracyValidationToolClass, SLOT(slot_HSliderReleased()));
         QObject::connect(pushButton_frameRate, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_setFrameRate()));
-        QObject::connect(pushButton_reportInterval, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_setReportInterval()));
+        QObject::connect(pushButton_recordInterval, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_setRecordInterval()));
         QObject::connect(pushButton_startTime, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_setStartTime()));
         QObject::connect(pushButton_inMinusOne, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_countInMinus()));
         QObject::connect(pushButton_outMinusOne, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_countOutMinus()));
-        QObject::connect(pushButton_output, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_outputData()));
+        QObject::connect(pushButton_export, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_exportFile()));
         QObject::connect(pushButton_close, SIGNAL(clicked()), AccuracyValidationToolClass, SLOT(slot_closeVideo()));
 
         comboBox_speed->setCurrentIndex(1);
@@ -312,8 +312,8 @@ public:
         );
         label_frameRate->setText(QApplication::translate("AccuracyValidationToolClass", " Frame Rate:     ", Q_NULLPTR));
         pushButton_frameRate->setText(QApplication::translate("AccuracyValidationToolClass", "Set", Q_NULLPTR));
-        label_reportInterval->setText(QApplication::translate("AccuracyValidationToolClass", " Report Interval:", Q_NULLPTR));
-        pushButton_reportInterval->setText(QApplication::translate("AccuracyValidationToolClass", "Set", Q_NULLPTR));
+        label_recordInterval->setText(QApplication::translate("AccuracyValidationToolClass", " Report Interval:", Q_NULLPTR));
+        pushButton_recordInterval->setText(QApplication::translate("AccuracyValidationToolClass", "Set", Q_NULLPTR));
         label_startTime->setText(QApplication::translate("AccuracyValidationToolClass", " Start Time:     ", Q_NULLPTR));
         dateTimeEdit_startTime->setDisplayFormat(QApplication::translate("AccuracyValidationToolClass", "yyyy/MM/dd HH:mm:ss", Q_NULLPTR));
         pushButton_startTime->setText(QApplication::translate("AccuracyValidationToolClass", "Set", Q_NULLPTR));
@@ -322,7 +322,7 @@ public:
         label_countOut->setText(QApplication::translate("AccuracyValidationToolClass", " Count of Out:", Q_NULLPTR));
         pushButton_outMinusOne->setText(QApplication::translate("AccuracyValidationToolClass", "      -1       ", Q_NULLPTR));
         pushButton_open->setText(QApplication::translate("AccuracyValidationToolClass", " Open a Video  ", Q_NULLPTR));
-        pushButton_output->setText(QApplication::translate("AccuracyValidationToolClass", "  Output Data  ", Q_NULLPTR));
+        pushButton_export->setText(QApplication::translate("AccuracyValidationToolClass", "  Export File  ", Q_NULLPTR));
         pushButton_close->setText(QApplication::translate("AccuracyValidationToolClass", "  Close Video  ", Q_NULLPTR));
     } // retranslateUi
 
