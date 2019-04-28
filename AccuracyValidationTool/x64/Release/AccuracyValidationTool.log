@@ -1,0 +1,9 @@
+﻿  Uic'ing accuracyvalidationtool.ui...
+  Rcc'ing accuracyvalidationtool.qrc...
+  Moc'ing accuracyvalidationtool.h...
+   RCC: Warning: No resources in 'H:\GitCodeBase\AccuracyValidationTool\AccuracyValidationTool\accuracyvalidationtool.qrc'.
+  accuracyvalidationtool.cpp
+  main.cpp
+  qrc_accuracyvalidationtool.cpp
+  moc_accuracyvalidationtool.cpp
+  AccuracyValidationTool.vcxproj -> H:\GitCodeBase\AccuracyValidationTool\x64\Release\AccuracyValidationTool.exe

@@ -6,10 +6,10 @@
 #include <qmessagebox.h>
 #include <qevent.h>
 #include <qpixmap.h>
-#include <qdebug.h>
 #include <qthread.h>
 #include <qdatetime.h>
 #include <qtextstream.h>
+#include <qdebug.h>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -83,6 +83,7 @@ private:
 	bool isVideoOpened = true; // 是否有视频被打开
 	bool isVideoOn = false; // 视频是否的播放和暂停
 	bool isVideoStopped = false; // 用于结束程序时判断视频是否停下来
+	bool isVideoUncomplete = false; // 视频是否不完整，即获取不了总帧数
 	bool isSetDone = false; // 是否初始设置完成，可以进行计数
 	bool isBeenExport = false; // 当前视频是否导出过文件
 

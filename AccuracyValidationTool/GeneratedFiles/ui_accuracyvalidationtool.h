@@ -33,9 +33,6 @@ class Ui_AccuracyValidationToolClass
 public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
-    QLabel *label_video;
-    QSlider *horizontalSlider;
-    QComboBox *comboBox_speed;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_frameRate;
@@ -49,6 +46,8 @@ public:
     QLabel *label_startTime;
     QDateTimeEdit *dateTimeEdit_startTime;
     QPushButton *pushButton_startTime;
+    QComboBox *comboBox_speed;
+    QLabel *label_video;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_countIn;
@@ -62,6 +61,7 @@ public:
     QPushButton *pushButton_open;
     QPushButton *pushButton_export;
     QPushButton *pushButton_close;
+    QSlider *horizontalSlider;
 
     void setupUi(QMainWindow *AccuracyValidationToolClass)
     {
@@ -75,29 +75,6 @@ public:
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setVerticalSpacing(12);
-        label_video = new QLabel(centralWidget);
-        label_video->setObjectName(QStringLiteral("label_video"));
-        QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(label_video->sizePolicy().hasHeightForWidth());
-        label_video->setSizePolicy(sizePolicy);
-        label_video->setFrameShape(QFrame::Box);
-        label_video->setScaledContents(true);
-
-        gridLayout->addWidget(label_video, 0, 0, 1, 8);
-
-        horizontalSlider = new QSlider(centralWidget);
-        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
-        horizontalSlider->setOrientation(Qt::Horizontal);
-
-        gridLayout->addWidget(horizontalSlider, 1, 0, 1, 7);
-
-        comboBox_speed = new QComboBox(centralWidget);
-        comboBox_speed->setObjectName(QStringLiteral("comboBox_speed"));
-
-        gridLayout->addWidget(comboBox_speed, 1, 7, 1, 1);
-
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(12);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
@@ -111,11 +88,11 @@ public:
 
         spinBox_frameRate = new QSpinBox(centralWidget);
         spinBox_frameRate->setObjectName(QStringLiteral("spinBox_frameRate"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(spinBox_frameRate->sizePolicy().hasHeightForWidth());
-        spinBox_frameRate->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(spinBox_frameRate->sizePolicy().hasHeightForWidth());
+        spinBox_frameRate->setSizePolicy(sizePolicy);
         spinBox_frameRate->setMinimum(1);
         spinBox_frameRate->setValue(15);
 
@@ -134,18 +111,18 @@ public:
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         label_recordInterval = new QLabel(centralWidget);
         label_recordInterval->setObjectName(QStringLiteral("label_recordInterval"));
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(label_recordInterval->sizePolicy().hasHeightForWidth());
-        label_recordInterval->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(label_recordInterval->sizePolicy().hasHeightForWidth());
+        label_recordInterval->setSizePolicy(sizePolicy1);
 
         horizontalLayout_4->addWidget(label_recordInterval);
 
         spinBox_recordInterval = new QSpinBox(centralWidget);
         spinBox_recordInterval->setObjectName(QStringLiteral("spinBox_recordInterval"));
-        sizePolicy1.setHeightForWidth(spinBox_recordInterval->sizePolicy().hasHeightForWidth());
-        spinBox_recordInterval->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(spinBox_recordInterval->sizePolicy().hasHeightForWidth());
+        spinBox_recordInterval->setSizePolicy(sizePolicy);
         spinBox_recordInterval->setMinimum(1);
         spinBox_recordInterval->setMaximum(10000);
         spinBox_recordInterval->setValue(5);
@@ -170,19 +147,19 @@ public:
 
         dateTimeEdit_startTime = new QDateTimeEdit(centralWidget);
         dateTimeEdit_startTime->setObjectName(QStringLiteral("dateTimeEdit_startTime"));
-        sizePolicy1.setHeightForWidth(dateTimeEdit_startTime->sizePolicy().hasHeightForWidth());
-        dateTimeEdit_startTime->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(dateTimeEdit_startTime->sizePolicy().hasHeightForWidth());
+        dateTimeEdit_startTime->setSizePolicy(sizePolicy);
         dateTimeEdit_startTime->setCalendarPopup(true);
 
         horizontalLayout->addWidget(dateTimeEdit_startTime);
 
         pushButton_startTime = new QPushButton(centralWidget);
         pushButton_startTime->setObjectName(QStringLiteral("pushButton_startTime"));
-        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(pushButton_startTime->sizePolicy().hasHeightForWidth());
-        pushButton_startTime->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(pushButton_startTime->sizePolicy().hasHeightForWidth());
+        pushButton_startTime->setSizePolicy(sizePolicy2);
 
         horizontalLayout->addWidget(pushButton_startTime);
 
@@ -191,6 +168,23 @@ public:
 
 
         gridLayout->addLayout(verticalLayout, 3, 0, 3, 1);
+
+        comboBox_speed = new QComboBox(centralWidget);
+        comboBox_speed->setObjectName(QStringLiteral("comboBox_speed"));
+
+        gridLayout->addWidget(comboBox_speed, 1, 7, 1, 1);
+
+        label_video = new QLabel(centralWidget);
+        label_video->setObjectName(QStringLiteral("label_video"));
+        QSizePolicy sizePolicy3(QSizePolicy::Ignored, QSizePolicy::Expanding);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label_video->sizePolicy().hasHeightForWidth());
+        label_video->setSizePolicy(sizePolicy3);
+        label_video->setFrameShape(QFrame::Box);
+        label_video->setScaledContents(true);
+
+        gridLayout->addWidget(label_video, 0, 0, 1, 8);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(12);
@@ -206,8 +200,8 @@ public:
         spinBox_countIn = new QSpinBox(centralWidget);
         spinBox_countIn->setObjectName(QStringLiteral("spinBox_countIn"));
         spinBox_countIn->setEnabled(false);
-        sizePolicy3.setHeightForWidth(spinBox_countIn->sizePolicy().hasHeightForWidth());
-        spinBox_countIn->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(spinBox_countIn->sizePolicy().hasHeightForWidth());
+        spinBox_countIn->setSizePolicy(sizePolicy2);
         spinBox_countIn->setMaximum(10000);
 
         horizontalLayout_5->addWidget(spinBox_countIn);
@@ -236,8 +230,8 @@ public:
         spinBox_countOut = new QSpinBox(centralWidget);
         spinBox_countOut->setObjectName(QStringLiteral("spinBox_countOut"));
         spinBox_countOut->setEnabled(false);
-        sizePolicy3.setHeightForWidth(spinBox_countOut->sizePolicy().hasHeightForWidth());
-        spinBox_countOut->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(spinBox_countOut->sizePolicy().hasHeightForWidth());
+        spinBox_countOut->setSizePolicy(sizePolicy2);
         spinBox_countOut->setMaximum(10000);
 
         horizontalLayout_6->addWidget(spinBox_countOut);
@@ -255,15 +249,15 @@ public:
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         pushButton_open = new QPushButton(centralWidget);
         pushButton_open->setObjectName(QStringLiteral("pushButton_open"));
-        sizePolicy3.setHeightForWidth(pushButton_open->sizePolicy().hasHeightForWidth());
-        pushButton_open->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(pushButton_open->sizePolicy().hasHeightForWidth());
+        pushButton_open->setSizePolicy(sizePolicy2);
 
         horizontalLayout_7->addWidget(pushButton_open);
 
         pushButton_export = new QPushButton(centralWidget);
         pushButton_export->setObjectName(QStringLiteral("pushButton_export"));
-        sizePolicy3.setHeightForWidth(pushButton_export->sizePolicy().hasHeightForWidth());
-        pushButton_export->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(pushButton_export->sizePolicy().hasHeightForWidth());
+        pushButton_export->setSizePolicy(sizePolicy2);
 
         horizontalLayout_7->addWidget(pushButton_export);
 
@@ -277,6 +271,12 @@ public:
 
 
         gridLayout->addLayout(verticalLayout_2, 3, 3, 3, 5);
+
+        horizontalSlider = new QSlider(centralWidget);
+        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
+        horizontalSlider->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(horizontalSlider, 1, 0, 1, 7);
 
         AccuracyValidationToolClass->setCentralWidget(centralWidget);
 
@@ -302,14 +302,6 @@ public:
     void retranslateUi(QMainWindow *AccuracyValidationToolClass)
     {
         AccuracyValidationToolClass->setWindowTitle(QApplication::translate("AccuracyValidationToolClass", "AccuracyValidationTool", Q_NULLPTR));
-        label_video->setText(QString());
-        comboBox_speed->clear();
-        comboBox_speed->insertItems(0, QStringList()
-         << QApplication::translate("AccuracyValidationToolClass", "x0.5", Q_NULLPTR)
-         << QApplication::translate("AccuracyValidationToolClass", "x1.0", Q_NULLPTR)
-         << QApplication::translate("AccuracyValidationToolClass", "x2.0", Q_NULLPTR)
-         << QApplication::translate("AccuracyValidationToolClass", "x4.0", Q_NULLPTR)
-        );
         label_frameRate->setText(QApplication::translate("AccuracyValidationToolClass", " Frame Rate:     ", Q_NULLPTR));
         pushButton_frameRate->setText(QApplication::translate("AccuracyValidationToolClass", "Set", Q_NULLPTR));
         label_recordInterval->setText(QApplication::translate("AccuracyValidationToolClass", " Report Interval:", Q_NULLPTR));
@@ -317,6 +309,14 @@ public:
         label_startTime->setText(QApplication::translate("AccuracyValidationToolClass", " Start Time:     ", Q_NULLPTR));
         dateTimeEdit_startTime->setDisplayFormat(QApplication::translate("AccuracyValidationToolClass", "yyyy/MM/dd HH:mm:ss", Q_NULLPTR));
         pushButton_startTime->setText(QApplication::translate("AccuracyValidationToolClass", "Set", Q_NULLPTR));
+        comboBox_speed->clear();
+        comboBox_speed->insertItems(0, QStringList()
+         << QApplication::translate("AccuracyValidationToolClass", "x0.5", Q_NULLPTR)
+         << QApplication::translate("AccuracyValidationToolClass", "x1.0", Q_NULLPTR)
+         << QApplication::translate("AccuracyValidationToolClass", "x2.0", Q_NULLPTR)
+         << QApplication::translate("AccuracyValidationToolClass", "x4.0", Q_NULLPTR)
+        );
+        label_video->setText(QString());
         label_countIn->setText(QApplication::translate("AccuracyValidationToolClass", " Count of In: ", Q_NULLPTR));
         pushButton_inMinusOne->setText(QApplication::translate("AccuracyValidationToolClass", "      -1       ", Q_NULLPTR));
         label_countOut->setText(QApplication::translate("AccuracyValidationToolClass", " Count of Out:", Q_NULLPTR));

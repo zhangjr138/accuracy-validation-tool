@@ -108,7 +108,7 @@ void AccuracyValidationTool::closeEvent(QCloseEvent *event)
 // 键盘右键前进
 void AccuracyValidationTool::videoForward()
 {
-	if (isVideoOpened && currentFrame < frameNumTotal && showOneFrame())
+	if (isVideoOpened && isSetDone && showOneFrame())
 	{
 		currentFrame++;
 		updateData();
@@ -119,7 +119,7 @@ void AccuracyValidationTool::videoForward()
 // 键盘左键后退
 void AccuracyValidationTool::videoBackward()
 {
-	if (isVideoOpened && currentFrame > 1)
+	if (isVideoOpened && !isVideoUncomplete && isSetDone && currentFrame > 1)
 	{
 		currentFrame -= 2;
 		capture.set(CV_CAP_PROP_POS_FRAMES, currentFrame);
@@ -135,7 +135,7 @@ void AccuracyValidationTool::videoPlay()
 { // 只要能读到图片则一直执行播放循环，否则跳出循环，播放帧率为设置的帧率
   // 播放的时候也一直在检测系统信号，一旦播放标志isVideoOn变以false则停止，跳出循环
 
-	while (isVideoOpened && isVideoOn && currentFrame < frameNumTotal && showOneFrame())
+	while (isVideoOpened && isVideoOn && isSetDone && showOneFrame())
 	{
 		currentFrame++;
 		updateData();
@@ -203,9 +203,19 @@ void AccuracyValidationTool::videoOpened()
 	// 获取视频信息并显示第一张图片
 	isVideoOpened = true;
 	frameNumTotal = capture.get(CV_CAP_PROP_FRAME_COUNT);
+
+	// 根据总帧数判断视频是否完整
+	if (frameNumTotal == 0)
+	{
+		isVideoUncomplete = true;
+	}
+
 	fps = capture.get(CV_CAP_PROP_FPS);
 	frameRate = fps;
-	resetHSlider(frameNumTotal);
+	if (!isVideoUncomplete)
+	{
+		resetHSlider(frameNumTotal);
+	}
 	showOneFrame();
 	currentFrame++;
 	maxFrameNum = currentFrame;
@@ -350,7 +360,11 @@ bool AccuracyValidationTool::showOneFrame()
 		ui.label_video->setPixmap(pixmap);
 
 		// 每放一张图片，进度条相应改变
-		setHSlider(currentFrame);
+		if (!isVideoUncomplete)
+		{
+			setHSlider(currentFrame);
+		}
+		
 		return true;
 	}
 	return false;
@@ -430,7 +444,10 @@ void AccuracyValidationTool::slot_setStartTime()
 
 	ui.dateTimeEdit_startTime->setDisabled(true);
 	ui.pushButton_startTime->setDisabled(true);
-	ui.horizontalSlider->setEnabled(true);
+	if (!isVideoUncomplete)
+	{
+		ui.horizontalSlider->setEnabled(true);
+	}
 	ui.comboBox_speed->setEnabled(true);
 	ui.pushButton_inMinusOne->setEnabled(true);
 	ui.pushButton_outMinusOne->setEnabled(true);
@@ -535,8 +552,8 @@ void AccuracyValidationTool::slot_exportFile()
 	// 写数据
 	for (int i = 0; i < countIn.size(); i++)
 	{
-		out << startTime.addSecs(i * recordInterval).toString("yyyy-MM-dd HH:mm:ss") << ","
-			<< startTime.addSecs((i + 1) * recordInterval - 1).toString("yyyy-MM-dd HH:mm:ss")
+		out << startTime.addSecs(i * recordInterval).toString("yyyy/MM/dd HH:mm:ss") << ","
+			<< startTime.addSecs((i + 1) * recordInterval - 1).toString("yyyy/MM/dd HH:mm:ss")
 			<< "," << QString::number(countIn[i]) << "," << QString::number(countOut[i]) << endl;
 	}
 	
@@ -561,14 +578,25 @@ void AccuracyValidationTool::slot_closeVideo()
 
 		// 对相关变量进行重置
 		currentFrame = 0;
+		maxFrameNum = 0;
+		frameRate = 0;
+		recordInterval = 0;
+		recordFrameNum = 0;
+		frameNumTotal = 0;
+		fps = 0;
+		frameInterval = 0;
 		isVideoOn = false;
 		isVideoOpened = false;
 		isVideoStopped = false;
+		isVideoUncomplete = false;
 		isSetDone = false;
 		isBeenExport = false;
 		countIn.clear();
 		countOut.clear();
-		capture.release();
+		if (capture.isOpened())
+		{
+			capture.release();
+		}
 
 		// 对Ui进行重置
 		resetUi();
